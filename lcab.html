@@ -21,32 +21,51 @@
     <div class="nav-wrapper green">
         <label class="text">Green Certificates</label>
         <img src="css/images/Logo.png" height="55" width="55" id="logo">
-        <label class="SignUp" onclick="goToReg()">SignUp</label>
     </div>
 </nav>
 <div class="container">
-    <h2>Send</h2>
+    <h2>Registration</h2>
     <div class="row">
         <form class="col s12">
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="to"  type="text" class="validate">
-                    <label for="to">To</label>
+                    <input id="name" type="text" class="validate">
+                    <label for="name">Name</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="amount" type="text" class="validate">
-                    <label for="amount">Amount</label>
+                    <input id="pid" type="text" class="validate">
+                    <label for="pid">??? (не помню как называется уникальный ключ)</label>
                 </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="login" type="text" class="validate">
+                    <label for="login">Login</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="pass" type="text" class="validate">
+                    <label for="pass">Password</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s9"></div>
+                <button id="signBtn" class="btn-large waves-effect waves-light green margin col s3" type="button">SignUp
+                </button>
             </div>
         </form>
     </div>
-    <div class="row">
-        <div class="col s9"></div>
-        <button class="btn-large waves-effect waves-light green margin col s3" type="submit" name="action" onclick="Send()">Send
-        </button>
-    </div>
+    <script>
+        window.onload = function () {
+            let btn = document.getElementById('signBtn');
+            btn.onclick = function () {
+                SignUp(document.getElementById('name'), document.getElementById('pid'), document.getElementById('login'), document.getElementById('pass'));
+            }
+        }
+    </script>
 </div>
 <script>
     window.onload = function () {

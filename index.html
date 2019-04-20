@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <script src="js/jquery.min.js"></script>
     <script src="js/index.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/template.js"></script>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
@@ -18,87 +21,30 @@
     <div class="nav-wrapper green">
         <label class="text">Green Certificates</label>
         <img src="css/images/Logo.png" height="55" width="55" id="logo">
+        <label class="SignUp" onclick="goToReg()">SignUp</label>
     </div>
 </nav>
 <div class="container">
-<table>
+<table id = "table">
     <thead>
     <tr>
-        <th>id</th>
         <th>Address</th>
-        <th>Price</th>
         <th>Amount</th>
         <th></th>
     </tr>
     </thead>
 
-    <tbody>
-    <tr>
-        <td>2341</td>
-        <td>ywfg6f656fsmk78786xs67887fs76f6f6d</td>
-        <td>$0.87</td>
-        <td>348990</td>
-        <td><button class="btn waves-effect waves-light green" type="submit" name="action" onclick="testClick()">Buy
-            <i class="material-icons right">settings_ethernet</i>
-        </button></td>
-    </tr>
-    <tr>
-        <td>2342</td>
-        <td>ywfg6f656fsmk78786xs67887fs76f6f6d</td>
-        <td>$3.76</td>
-        <td>348990</td>
-        <td><button class="btn waves-effect waves-light green" type="submit" name="action" onclick="testClick()">Buy
-            <i class="material-icons right">settings_ethernet</i>
-        </button></td>
-    </tr>
-    <tr>
-        <td>2343</td>
-        <td>ywfg6f656fsmk78786xs67887fs76f6f6d</td>
-        <td>$7.00</td>
-        <td>348990</td>
-        <td><button class="btn waves-effect waves-light green" type="submit" name="action" onclick="testClick()">Buy
-            <i class="material-icons right">settings_ethernet</i>
-        </button></td>
-    </tr>
-    <tr>
-        <td>2343</td>
-        <td>ywfg6f656fsmk78786xs67887fs76f6f6d</td>
-        <td>$7.00</td>
-        <td>348990</td>
-        <td><button class="btn waves-effect waves-light green" type="submit" name="action" onclick="testClick()">Buy
-            <i class="material-icons right">settings_ethernet</i>
-        </button></td>
-    </tr>
-    <tr>
-        <td>2343</td>
-        <td>ywfg6f656fsmk78786xs67887fs76f6f6d</td>
-        <td>$7.00</td>
-        <td>348990</td>
-        <td><button class="btn waves-effect waves-light green" type="submit" name="action" onclick="testClick()">Buy
-            <i class="material-icons right">settings_ethernet</i>
-        </button></td>
-    </tr><tr>
-        <td>2343</td>
-        <td>ywfg6f656fsmk78786xs67887fs76f6f6d</td>
-        <td>$7.00</td>
-        <td>348990</td>
-        <td><button class="btn waves-effect waves-light green" type="submit" name="action" onclick="testClick()">Buy
-            <i class="material-icons right">settings_ethernet</i>
-        </button></td>
-    </tr>
-    <tr>
-        <td>2343</td>
-        <td>ywfg6f656fsmk78786xs67887fs76f6f6d</td>
-        <td>$7.00</td>
-        <td>348990</td>
-        <td><button class="btn waves-effect waves-light green" type="submit" name="action" onclick="testClick()">Buy
-            <i class="material-icons right">settings_ethernet</i>
-        </button></td>
-    </tr>
-
-    </tbody>
 </table>
 </div>
+<script>
+    window.onload = function () {
+        initIndex();
+        if(localStorage.getItem('name') || localStorage.getItem('name')!=''){
+            document.getElementsByClassName('SignUp')[0].innerText = localStorage.getItem('name');
+        }
+    }
+
+</script>
 <!--JavaScript at end of body for optimized loading-->
 <script type="text/javascript" src="js/materialize.min.js"></script>
 </body>
