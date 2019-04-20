@@ -1,4 +1,4 @@
-let host = 'http://localhost:8080';
+
 let tmpAddress;
 function goToReg(){
     location.href = 'lcab.html';
@@ -8,6 +8,7 @@ function goToBuy(address,amount){
     localStorage.setItem('tmpAddress', address);
     localStorage.setItem('tmpAmount', "Current balance : "+amount);
     location.href = 'buy.html';
+    return false;
 }
 
 function goToMain() {

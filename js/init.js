@@ -21,9 +21,9 @@ function initIndex(){
                         let btn = document.createElement('td');
                         address.innerText = list[j].address;
                         tr.appendChild(address);
-                        tr.onclick = function () {
+                        /*tr.onclick = function () {
                             saveAddress(list[j].address);
-                        }
+                        }*/
 
                         balance.innerText = list[j].balance;
                         tr.appendChild(balance);
@@ -57,10 +57,10 @@ function initIndex(){
     console.log(tbody)
 }
 
-function saveAddress(address){
+/*function saveAddress(address){
     location.href = 'main.html';
     localStorage.setItem('selectedAddress',address);
-}
+}*/
 function initMain(address){
 
     let tbody = document.createElement('tbody');
