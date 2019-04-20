@@ -10,6 +10,10 @@ function goToBuy(address,amount){
     location.href = 'buy.html';
 }
 
+function goToMain() {
+    location.href = 'main.html';
+}
+
 function goToSend() {
     location.href = 'send.html';
 }
