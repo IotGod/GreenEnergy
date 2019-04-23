@@ -1,0 +1,26 @@
+{
+    "name": "green-certificates",
+    "version": "0.0.1",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node server/server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@gitlab.com/gregorymel/greencertificates.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://gitlab.com/gregorymel/greencertificates/issues"
+    },
+    "dependencies": {
+        "iota.lib.js": "latest",
+        "express": "latest",
+        "iota.crypto.js": "latest",
+        "uglify-js": "^3.5.6"
+    },
+    "homepage": "https://gitlab.com/gregorymel/greencertificates#README"
+}
