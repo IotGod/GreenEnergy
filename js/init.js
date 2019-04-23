@@ -1,4 +1,6 @@
-function initIndex(){
+// let host = 'http://localhost:10228';
+
+function initIndex() {
     let tbody = document.createElement('tbody');
 
     fetch(host+'/erc20/totalSupply',
@@ -6,6 +8,7 @@ function initIndex(){
             headers: {
                 'Content-Type': 'application/json',
             },
+            // mode: 'no-cors',
             method: 'GET'
         })
         .then((res1) => {
