@@ -8,6 +8,8 @@ const PROVIDER = 'https://nodes.devnet.thetangle.org:443';
 const depth = 3;
 const minWeightMagnitude = 9;
 const defaultSupply = 1;
+const STOVE = "BURNT";
+const startIndex = 0;
 
 // const iota = composeAPI({
 //     provider: PROVIDER
@@ -28,32 +30,43 @@ function transferFrom(seed, to, message) {
     // Prepare a bundle and signs it.
     // var trytes = await iota.api.prepareTransfers(seed, transfers);
     // var bundle = await iota.api.sendTrytes(trytes, depth, minWeightMagnitude);
-    
-    iota.api.sendTransfer(seed, depth, minWeightMagnitude, transfers, {}, (err, bundle) => {
-        console.log(bundle[0].hash);
-        console.log(bundle)
-    });
+    // var hash_promise = new Promise((resolve, reject) => {
 
-    // return bundle[0].hash;
+    // })
+
+    return new Promise((resolve, reject) => {
+        try {
+            iota.api.sendTransfer(seed, depth, minWeightMagnitude, transfers, {}, (err, bundle) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    console.log(bundle);
+                    resolve(bundle[0].hash);
+                }
+            });
+        } catch(err) {
+            reject(err);
+        }
+    });
 }
 
-function requestCertificates(seed, host, from, tokens) {
+async function requestCertificates(seed, host, from, tokens) {
     var meta = {
         type : 'request',
         from : from,
         value : tokens 
     }
 
-    transferFrom(seed, host, JSON.stringify(meta));
+    return transferFrom(seed, host, JSON.stringify(meta));
 }
 
-function burnCertificates(seed, host, from, tokens) {
+async function burnCertificates(seed, host, from, tokens) {
     var meta = {
         type : 'burn',
         value : tokens 
     }
 
-    transferFrom(seed, host, JSON.stringify(meta));
+    return transferFrom(seed, host, JSON.stringify(meta));
 }
 
 var seed = 'EIE9VSLMIZTAPLFIALSIVMSDRMNSQWVRGGKY9VRLRWUMUWHLWFTCJEBBSUEFVXKJLYRRCELU9VHSMLURF';
@@ -61,5 +74,8 @@ var addr = 'SMNEYPUEATGADPKXTXGQXPEWUGQBMZNEMIPUOQB9ZFVFGZBLBCDHLZPQOLZPRIAPXXRN
 
 // // tranferFrom(seed, addr, 1)
 // burnCertificates(seed, addr, addr, 10)
+//     .then(hash => {
+//         console.log(hash);
+//     });
 
 // export default requestCertificates;
