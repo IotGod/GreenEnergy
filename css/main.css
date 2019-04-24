@@ -20,8 +20,7 @@ main {
     color: whitesmoke;
     font-size: xx-large;
 }
-
-.text{
+.signup{
     position: absolute;
     left: 5%;
     /* right: 5%; */

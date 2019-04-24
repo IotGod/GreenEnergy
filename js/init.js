@@ -5,10 +5,9 @@ function initIndex() {
 
     fetch(host+'/erc20/totalSupply',
         {
-            headers: {
+            /*headers: {
                 'Content-Type': 'application/json',
-            },
-            // mode: 'no-cors',
+            },*/
             method: 'GET'
         })
         .then((res1) => {
