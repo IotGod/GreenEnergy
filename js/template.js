@@ -1,4 +1,4 @@
-let host = 'http://localhost:8080';
+let host = 'https://secure-falls-66692.herokuapp.com';
 
 function buy() {
     alert("buy");
