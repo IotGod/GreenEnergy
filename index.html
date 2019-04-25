@@ -46,11 +46,10 @@
 </div>
 <script>
     window.onload = function () {
+        initIndex();
         if(localStorage.getItem('name')) { //|| localStorage.getItem('name')!=''){
-            initIndex();
             document.getElementsByClassName("signup")[0].innerText = localStorage.getItem('name');
         } else {
-            alert("Please, sign up!");
             document.getElementsByClassName("signup")[0].innerText = 'SignUp';
         }
     }

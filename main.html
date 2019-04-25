@@ -61,10 +61,11 @@
 </div>
 <script>
     window.onload = function () {
-        initMain(localStorage.getItem('selectedAddress'));
         if(localStorage.getItem('name')) {
+            initMain(localStorage.getItem('selectedAddress'));
             document.getElementsByClassName("signup")[0].innerText = localStorage.getItem('name');
         } else {
+            alert("Please, sign up!");
             document.getElementsByClassName("signup")[0].innerText = 'SignUp';
         }
     }
