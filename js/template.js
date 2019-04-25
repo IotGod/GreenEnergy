@@ -3,8 +3,33 @@
 // let host = 'http://127.0.0.1';
 let host = 'https://secure-falls-66692.herokuapp.com';
 
-function buy() {
-    alert("buy");
+async function buy() {
+    document.getElementsByClassName("overlay")[0].style.display = 'block';
+
+    try {
+        let seed = localStorage.getItem('pid');
+        let from = localStorage.getItem('tmpAddress');
+        let tx_hash = await requestCertificates(seed, hostAddr, from, balance);
+        let to = await getAddrBySeed(seed);
+        
+        var resp = await fetch(host + '/erc20/transferFrom', {
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            method: 'POST',
+                            body: JSON.stringify({
+                                from: from,
+                                to: to,
+                                tokens: 5
+                            })
+                        })
+    } catch(err) {
+        alert(err.message);    
+    }
+
+    
+    document.getElementsByClassName("overlay")[0].style.display = 'none';
+    location.href = 'index.html';
 }
 
 function Send() {
@@ -13,7 +38,7 @@ function Send() {
     let pid = localStorage.getItem('pid');
 
     
-
+    
 
     alert(pid);
 }

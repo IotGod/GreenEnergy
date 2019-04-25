@@ -6,12 +6,15 @@
     <script src="js/index.js"></script>
     <script src="js/init.js"></script>
     <script src="js/config.js"></script>
+    <script src="js/iota-browser.js"></script>
+    <script src="js/erc20_requests.js"></script>
     <script src="js/template.js"></script>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="css/main.css"/>
+    <link type="text/css" rel="stylesheet" href="css/waiter.css"/>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>GreenEnergy</title>
@@ -24,9 +27,12 @@
         <label class="signup" onclick="goToReg()">SignUp</label>
     </div>
 </nav>
+<div class="overlay">
+        <div class="lds-grid"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+</div>
 <div class="container">
-    <h4>Address: </h4> <h6 id="addressH"></h6>
-    <h4>Balance: </h4> <h6 id="balanceH"></h6> <br><br><br><br><br><br>
+    <!-- <h4>Address: </h4> <h6 id="addressH"></h6> -->
+    <h4>Certificates: </h4> <h6 id="balanceH"></h6> <br><br><br><br><br><br>
 <div class="buttons">
     <div class="row">
         <div class="col s3"></div>
@@ -44,8 +50,8 @@
     <table id = "mainTable">
         <thead>
         <tr>
-            <th>Address</th>
-            <th>Amount</th>
+            <th>Last address</th>
+            <th>IOTA balance</th>
             <th></th>
         </tr>
         </thead>
@@ -56,8 +62,10 @@
 <script>
     window.onload = function () {
         initMain(localStorage.getItem('selectedAddress'));
-        if(localStorage.getItem('name') || localStorage.getItem('name')!=''){
-            document.getElementsByClassName('SignUp')[0].innerText = localStorage.getItem('name');
+        if(localStorage.getItem('name')) {
+            document.getElementsByClassName("signup")[0].innerText = localStorage.getItem('name');
+        } else {
+            document.getElementsByClassName("signup")[0].innerText = 'SignUp';
         }
     }
 </script>

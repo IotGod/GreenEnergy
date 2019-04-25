@@ -6,6 +6,7 @@ function goToReg(){
 
 function goToBuy(address,amount){
     localStorage.setItem('tmpAddress', address);
+    localStorage.setItem('tmpBalance', amount);
     localStorage.setItem('tmpAmount', "Current balance : "+amount);
     location.href = 'buy.html';
     return false;
@@ -30,8 +31,10 @@ function SignUp(name, pid, login, password) {
     localStorage.setItem('password', password.value);
 
     let lcab = document.getElementsByClassName("SignUp");
-    lcab.forEach(function(element) {
-        element.innerText = name.value;
-    });
+    // lcab.innerText = name.value;
+    console.log(name.value);
+    // lcab.forEach(function(element) {
+    //     element.innerText = name.value;
+    // });
     location.href = 'index.html';
 }

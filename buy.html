@@ -6,12 +6,15 @@
     <script src="js/index.js"></script>
     <script src="js/init.js"></script>
     <script src="js/config.js"></script>
+    <script src="js/iota-browser.js"></script>
+    <script src="js/erc20_requests.js"></script>
     <script src="js/template.js"></script>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="css/main.css"/>
+    <link type="text/css" rel="stylesheet" href="css/waiter.css"/>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>GreenEnergy</title>
@@ -24,16 +27,54 @@
         <label class="signup" onclick="goToReg()">SignUp</label>
     </div>
 </nav>
+<div class="overlay">
+        <div class="lds-grid"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+</div>
 <div class="container">
     <h2>Buy</h2>
     <div class="row">
         <form class="col s12">
-            <div class="row">
+            <!-- <div class="row">
                 <div class="input-field col s12">
-                    <input id="from" type="text" class="validate">
+                    <input id="from" class="validate">
                     <label for="from">From</label>
                 </div>
-            </div>
+            </div> -->
+            <table id = "table_addr">
+                    <thead>
+                    <tr>
+                        <th>Address</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+            </table>
+            <table id = "table_balance">
+                    <thead>
+                    <tr>
+                        <th>Balance</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+            </table>
+            <script>
+                let trAddr = document.createElement('tr');
+                let trBalance = document.createElement('tr');
+                let address = document.createElement('td');
+                let balance = document.createElement('td');
+                address.innerText = localStorage.getItem('tmpAddress');
+                trAddr.appendChild(address);
+                balance.innerText = localStorage.getItem('tmpBalance');
+                trBalance.appendChild(balance);
+                
+                let tbodyAddr = document.createElement('tbody');
+                tbodyAddr.appendChild(trAddr);
+                let tbodyBalance = document.createElement('tbody');
+                tbodyBalance.appendChild(trBalance);
+
+                document.getElementById('table_addr').appendChild(tbodyAddr);
+                document.getElementById('table_balance').appendChild(tbodyBalance);
+
+            </script>
             <div class="row">
                 <div id="amount_input" class="input-field col s12 tooltipped" data-position="bottom" >
                     <input id="amount" type="text" class="validate">
@@ -44,15 +85,15 @@
     </div>
     <div class="row">
         <div class="col s9"></div>
-        <button class="btn-large waves-effect waves-light green margin col s3" type="submit" name="action" onclick="buy()">Buy
+        <button id="buy-button" class="btn-large waves-effect waves-light green margin col s3" type="submit" name="action" onclick="buy()">Buy
         </button>
     </div>
 </div>
 <script>
     window.onload = function () {
         document.getElementById("amount_input").setAttribute("data-tooltip", localStorage.getItem('tmpAmount'));
-        if(localStorage.getItem('name') || localStorage.getItem('name')!=''){
-            document.getElementsByClassName('SignUp')[0].innerText = localStorage.getItem('name');
+        if(localStorage.getItem('name')){
+            document.getElementsByClassName('signup')[0].innerText = localStorage.getItem('name');
         }
     }
 

@@ -10,6 +10,7 @@ const minWeightMagnitude = 9;
 const defaultSupply = 1;
 const STOVE = "BURNT";
 const startIndex = 0;
+var hostAddr = 'SMNEYPUEATGADPKXTXGQXPEWUGQBMZNEMIPUOQB9ZFVFGZBLBCDHLZPQOLZPRIAPXXRNZBZNQLO9XYUP9RIGKXRSPX';
 
 // const iota = composeAPI({
 //     provider: PROVIDER
@@ -69,8 +70,8 @@ async function burnCertificates(seed, host, from, tokens) {
     return transferFrom(seed, host, JSON.stringify(meta));
 }
 
-var seed = 'EIE9VSLMIZTAPLFIALSIVMSDRMNSQWVRGGKY9VRLRWUMUWHLWFTCJEBBSUEFVXKJLYRRCELU9VHSMLURF';
-var addr = 'SMNEYPUEATGADPKXTXGQXPEWUGQBMZNEMIPUOQB9ZFVFGZBLBCDHLZPQOLZPRIAPXXRNZBZNQLO9XYUP9RIGKXRSPX';
+// var seed = 'EIE9VSLMIZTAPLFIALSIVMSDRMNSQWVRGGKY9VRLRWUMUWHLWFTCJEBBSUEFVXKJLYRRCELU9VHSMLURF';
+
 
 // // tranferFrom(seed, addr, 1)
 // burnCertificates(seed, addr, addr, 10)
