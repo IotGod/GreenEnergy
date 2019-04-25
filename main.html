@@ -66,6 +66,7 @@
             document.getElementsByClassName("signup")[0].innerText = localStorage.getItem('name');
         } else {
             alert("Please, sign up!");
+            location.href = 'index.html';
             document.getElementsByClassName("signup")[0].innerText = 'SignUp';
         }
     }
