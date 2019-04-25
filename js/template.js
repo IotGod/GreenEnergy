@@ -3,14 +3,38 @@
 // let host = 'http://127.0.0.1';
 let host = 'https://secure-falls-66692.herokuapp.com';
 
+async function sha256(message) {
+    // encode as UTF-8
+    const msgBuffer = new TextEncoder('utf-8').encode(message);                    
+
+    // hash the message
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+
+    // convert ArrayBuffer to Array
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+
+    // convert bytes to hex string                  
+    const hashHex = hashArray.map(b => ('00' + b.toString(16)).slice(-2)).join('');
+    return hashHex;
+}
+
 async function buy() {
+    var tokens = document.getElementById("amount").value;
+
+    if(!tokens.match(/^-{0,1}\d+$/)) {
+        alert("Invalid number");
+        return;    
+    }
+
     document.getElementsByClassName("overlay")[0].style.display = 'block';
 
     try {
         let seed = localStorage.getItem('pid');
         let from = localStorage.getItem('tmpAddress');
-        let tx_hash = await requestCertificates(seed, hostAddr, from, balance);
-        let to = await getAddrBySeed(seed);
+        let tx_hash = await requestCertificates(seed, hostAddr, from, tokens);
+        alert("Tx hash: " + tx_hash);
+
+        let to = await sha256(seed);
         
         var resp = await fetch(host + '/erc20/transferFrom', {
                             headers: {
@@ -20,7 +44,7 @@ async function buy() {
                             body: JSON.stringify({
                                 from: from,
                                 to: to,
-                                tokens: 5
+                                tokens: tokens
                             })
                         })
     } catch(err) {
@@ -69,30 +93,39 @@ function getAccountInfo(seed) {
 
 
 async function burn() {
-    let address = localStorage.getItem('selectedAddrForMain');
-    let balance = localStorage.getItem('selectedBlncForMain');
-    // let seed = localStorage.getItem('pid');
+    var tokens = document.getElementById("amount").value;
 
-    // let tx_hash = await burnCertificates(seed, addr, address, balance);
-    let from = await getAddrBySeed(seed);
+    if(!tokens.match(/^-{0,1}\d+$/)) {
+        alert("Invalid number");
+        return;    
+    }
 
-    // // var data = await getAccountInfo(seed);
+    document.getElementsByClassName("overlay")[0].style.display = 'block';
 
-    // // console.log(data);
+    // let address = localStorage.getItem('selectedAddrForMain');
+    // let balance = localStorage.getItem('selectedBlncForMain');
+    let seed = localStorage.getItem('pid');
 
-    // var resp = await fetch(host + '/erc20/transferFrom', {
-    //                     headers: {
-    //                         'Content-Type': 'application/json',
-    //                     },
-    //                     method: 'POST',
-    //                     body: {
-    //                         from: from,
-    //                         to: STOVE,
-    //                         tokens: 1
-    //                     }
-    //                 })
-    //                 .then(res => {
-    //                     console.log('finish');
-    //                 });
-    // alert(pid);
+    let tx_hash = await burnCertificates(seed, hostAddr, '', tokens);
+    alert("Tx hash: " + tx_hash);
+
+    let from = await sha256(seed);
+
+    var resp = await fetch(host + '/erc20/transferFrom', {
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        method: 'POST',
+                        body: JSON.stringify({
+                            from: from,
+                            to: STOVE,
+                            tokens: tokens
+                        })
+                    })
+                    .then(res => {
+                        console.log('finish');
+                    });
+    
+    document.getElementsByClassName("overlay")[0].style.display = 'none';
+    location.href = 'index.html';
 }

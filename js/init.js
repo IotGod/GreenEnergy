@@ -12,11 +12,15 @@ function initIndex() {
         })
         .then((res1) => {
             console.log('res1.token', res1.json()
-                .then((res2)=>{
+                .then(async (res2)=>{
                     console.log('res2',res2);
 
                     let list = res2;
+                    let myAddr = await sha256(localStorage.getItem('pid'));
                     for (let j = 0; j < list.length; j++) {
+                        if (list[j].address == "BURNT" || list[j].address == myAddr) {
+                            break;
+                        }
                         let tr = document.createElement('tr');
                         let address = document.createElement('td');
                         let balance = document.createElement('td');
@@ -74,6 +78,7 @@ async function initMain(address){
     let tbody = document.createElement('tbody');
 
     let seed = localStorage.getItem('pid');
+    let from = await sha256(seed);
     let info = await getAccountInfo(seed);
     console.log(info);
 
@@ -90,48 +95,19 @@ async function initMain(address){
     tbody.appendChild(tr);
     document.getElementById('mainTable').appendChild(tbody);
 
+    let res = await fetch(host + '/erc20/balanceOf?' + 'address=' + from, 
+                    {
+                        method: 'GET',
+                    })
+
+    if (res.status != 200) {
+        document.getElementById('balanceH').innerText = 0;
+    } else {
+        var data = await res.json();
+        document.getElementById('balanceH').innerText = data.balance;
+    }
+    
+    localStorage.setItem('currentBalance', document.getElementById('balanceH').innerText);
+
     document.getElementsByClassName("overlay")[0].style.display = 'none';
-    //fetch(host+'/erc20/balanceOf?address='+address,
-    // let res1 = await fetch(host+'/erc20/totalSupply',
-    //                 {
-    //                     headers: {
-    //                         'Content-Type': 'application/json',
-    //                     },
-    //                     method: 'GET'
-    //                 });
-
-    // console.log(await res1.json());
-        // .then((res1) => {
-        //     console.log('res1.token', res1.json()
-        //         .then((res2)=>{
-        //             console.log('res2',res2);
-
-        //             let list = res2;
-        //             for (let j = 0; j < list.length; j++) {
-        //                 let tr = document.createElement('tr');
-        //                 let address = document.createElement('td');
-        //                 let balance = document.createElement('td');
-        //                 address.innerText = list[j].address;
-        //                 if (address.innerText.length > 20) {
-        //                     address.innerText = list[j].address.slice(0, 20) + '...';
-        //                 } else {
-        //                     address.innerText = list[j].address;
-        //                 }
-        //                 tr.appendChild(address);
-
-        //                 balance.innerText = list[j].balance;
-        //                 tr.appendChild(balance);
-
-        //                 tr.onclick = function () {
-        //                     document.getElementById('addressH').innerText = list[j].address.slice(0, 20) + "...";
-        //                     document.getElementById('balanceH').innerText = list[j].balance;
-        //                     localStorage.setItem('selectedAddrForMain',list[j].address);
-        //                     localStorage.setItem('selectedBlncForMain',list[j].balance);
-        //                 }
-        //                 tbody.appendChild(tr);
-        //             }
-        //             document.getElementById('mainTable').appendChild(tbody);
-        //         }));
-
-        // });
 }
