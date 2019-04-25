@@ -41,6 +41,11 @@ function initIndex() {
 
 
                         let button = document.createElement('button');
+                        
+                        if (!localStorage.getItem('pid')) {
+                            button.disabled = true;
+                        }
+
                         let i = document.createElement('i');
 
                         i.className = 'material-icons right';
