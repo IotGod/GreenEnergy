@@ -91,7 +91,7 @@ async function initMain(address){
     let lastAddr = document.createElement('td');
     let iotaBalance = document.createElement('td');
 
-    lastAddr.innerText = info.latestAddress.slice(0, 20) + '...';
+    lastAddr.innerText = info.latestAddress;
     tr.appendChild(lastAddr);
 
     iotaBalance.innerText = info.balance;
